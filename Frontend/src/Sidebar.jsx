@@ -18,6 +18,7 @@ function Sidebar() {
     const menuRef = useRef(null);
 
     const authHeaders = { "Content-Type": "application/json", "Authorization": `Bearer ${token}` };
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
 
     const savePinned = (updated) => {
         setPinned(updated);
@@ -26,7 +27,7 @@ function Sidebar() {
 
     const getAllThreads = async () => {
         try {
-            const res = await fetch("http://localhost:8080/api/thread", { headers: authHeaders });
+            const res = await fetch(`${API_BASE_URL}/thread`, { headers: authHeaders });
             const data = await res.json();
             setAllThreads(data.map(t => ({ threadId: t.threadId, title: t.title, updatedAt: t.updatedAt })));
         } catch (err) { console.log(err); }
@@ -53,7 +54,7 @@ function Sidebar() {
     const changeThread = async (threadId) => {
         setCurrThreadId(threadId);
         try {
-            const res = await fetch(`http://localhost:8080/api/thread/${threadId}`, { headers: authHeaders });
+            const res = await fetch(`${API_BASE_URL}/thread/${threadId}`, { headers: authHeaders });
             const data = await res.json();
             setPrevChats(data); setNewChat(false); setReply(null);
         } catch (err) { console.log(err); }
@@ -62,7 +63,7 @@ function Sidebar() {
     const deleteThread = async (e, threadId) => {
         e.stopPropagation(); setMenuOpen(null);
         try {
-            await fetch(`http://localhost:8080/api/thread/${threadId}`, { method: "DELETE", headers: authHeaders });
+            await fetch(`${API_BASE_URL}/thread/${threadId}`, { method: "DELETE", headers: authHeaders });
             setAllThreads(prev => prev.filter(t => t.threadId !== threadId));
             savePinned(pinned.filter(id => id !== threadId));
             if (threadId === currThreadId) createNewChat();
@@ -77,7 +78,7 @@ function Sidebar() {
     const submitRename = async (threadId) => {
         if (!renameVal.trim()) { setRenaming(null); return; }
         try {
-            await fetch(`http://localhost:8080/api/thread/${threadId}/rename`, {
+            await fetch(`${API_BASE_URL}/thread/${threadId}/rename`, {
                 method: "PATCH",
                 headers: authHeaders,
                 body: JSON.stringify({ title: renameVal })

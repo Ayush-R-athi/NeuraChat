@@ -36,7 +36,8 @@ function ChatWindow() {
             const controller = new AbortController();
             abortRef.current = controller;
 
-            const res = await fetch("http://localhost:8080/api/chat/stream", {
+            const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
+            const res = await fetch(`${API_BASE_URL}/chat/stream`, {
                 method: "POST",
                 headers: authHeaders,
                 body: JSON.stringify({ message, threadId: currThreadId, model }),

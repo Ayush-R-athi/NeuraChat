@@ -17,13 +17,14 @@ function Auth() {
         }
 
         setLoading(true);
-        const endpoint = isLogin ? "/api/auth/login" : "/api/auth/register";
+        const endpoint = isLogin ? "/auth/login" : "/auth/register";
         const body = isLogin
             ? { email: form.email, password: form.password }
             : { name: form.name, email: form.email, password: form.password };
 
         try {
-            const res = await fetch(`http://localhost:8080${endpoint}`, {
+            const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
+            const res = await fetch(`${API_BASE_URL}${endpoint}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body),
