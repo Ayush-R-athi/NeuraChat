@@ -183,7 +183,7 @@ function Sidebar() {
         <section className="sidebar">
             <div className="sidebarTop">
                 <div className="sidebarHeader">
-                    <img src="src/assets/Neura.png" alt="logo" className="logo" />
+                    <img src="/Neura.png" alt="logo" className="logo" />
                     <span className="appName">NeuraChat</span>
 
                     <button className="iconBtn" onClick={() => setSidebarOpen(false)} title="Collapse sidebar">

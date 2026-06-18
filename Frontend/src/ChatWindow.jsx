@@ -174,7 +174,7 @@ function ChatWindow() {
                 <div className="inputBox">
                     <textarea
                         ref={textareaRef}
-                        placeholder="Ask SigmaGPT anything..."
+                        placeholder="Ask NeuraChat anything..."
                         value={prompt}
                         rows={1}
                         onChange={handleTextarea}
@@ -192,7 +192,7 @@ function ChatWindow() {
                         </button>
                     </div>
                 </div>
-                <p className="info">SigmaGPT can make mistakes. Verify important information.</p>
+                <p className="info">NeuraChat can make mistakes. Verify important information.</p>
             </div>
         </div>
     );

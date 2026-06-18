@@ -45,7 +45,7 @@ function Auth() {
         <div className="authPage">
             <div className="authCard">
                 <div className="authLogo">
-                    <img src="src/assets/Neura.png" alt="logo" />
+                    <img src="/Neura.png" alt="logo" />
                     <h1>NeuraChat</h1>
                 </div>
                 <p className="authSubtitle">{isLogin ? "Welcome back" : "Create your account"}</p>
